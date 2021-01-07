@@ -13,7 +13,7 @@ const Nav: React.FC = () => {
           Staking
         </StyledLink>
       </StyledNav>
-      <ExternalLink href="https://trade.stablexswap.com">
+      <ExternalLink href="https://trade.stablex.finance.com">
         Swap(New!)
       </ExternalLink>
     </>
