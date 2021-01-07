@@ -41,7 +41,7 @@ const Home: React.FC = () => {
          <StyledInfo>
            <a
             target="_blank" 
-            href="https://trade.stablexswap.com?ref=homepage"
+            href="https://trade.stablex.finance?ref=homepage"
           >
             ➡️ Try the new swap!{' '}
           </a>
