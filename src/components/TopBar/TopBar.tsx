@@ -1,41 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Container from '../Container'
-import Logo from '../Logo'
 import { Link } from 'react-router-dom'
 import title from '../../assets/img/title.png'
 
 import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
-import ThemeSwitch from './components/ThemeSwitch'
 
 interface TopBarProps {
-    isDark: boolean
-    toogleTheme: (isDark: boolean) => void
-    onPresentMobileMenu: () => void
+  isDark: boolean
+  toogleTheme: (isDark: boolean) => void
+  onPresentMobileMenu: () => void
 }
 
-const TopBar: React.FC<TopBarProps> = ({ isDark, toogleTheme, onPresentMobileMenu}) => {
-    return (
-        <StyledTopBar>
-            <Container size="sm">
-                <StyledTopBarInner>
-                    <StyledLogoWrapper>
-                      <Link to="/">
-                        <img src={title} height="28" />
-                        stableXswap
-                      </Link>
-                    </StyledLogoWrapper>
-                    <Nav />
-                    <StyledAccountButtonWrapper>
-                        <AccountButton/>
-                    </StyledAccountButtonWrapper>
-
-                </StyledTopBarInner>
-            </Container>
-        </StyledTopBar>
-    )
+const TopBar: React.FC<TopBarProps> = ({
+  isDark,
+  toogleTheme,
+  onPresentMobileMenu,
+}) => {
+  return (
+    <StyledTopBar>
+      <StyledTopBarInner>
+        <StyledLogoWrapper>
+          <Link to="/">
+            <img src={title} height="36" />
+          </Link>
+        </StyledLogoWrapper>
+        <Nav />
+        <StyledAccountButtonWrapper>
+          <AccountButton />
+        </StyledAccountButtonWrapper>
+      </StyledTopBarInner>
+    </StyledTopBar>
+  )
 }
 
 const Menu = styled.div`
@@ -55,8 +52,7 @@ const Menu = styled.div`
 `
 
 const StyledLogoWrapper = styled.div`
-  width: 260px;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   @media (max-width: 420px) {
     width: auto;
   }
@@ -70,17 +66,23 @@ const StyledLogoWrapper = styled.div`
     font-size: 20px;
     font-weight: 900;
   }
+  padding-right: 24px;
 `
-
-const StyledTopBar = styled.div``
+const StyledTopBar = styled.div`
+  display: flex;
+`
 
 const StyledTopBarInner = styled.div`
   align-items: center;
   display: flex;
   height: ${(props) => props.theme.topBarSize}px;
-  justify-content: space-between;
-  max-width: ${(props) => props.theme.siteWidth}px;
+  padding: 0 20px 0 20px;
   width: 100%;
+  @media (min-width: 600px) {
+    padding: 0 80px 0 80px;
+  }
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 `
 const StyledNavWrapper = styled.div`
   display: flex;
@@ -95,6 +97,7 @@ const StyledAccountButtonWrapper = styled.div`
   @media (max-width: 850px) {
     display: none;
   }
+  margin-left: auto;
   align-items: center;
   display: flex;
   justify-content: flex-end;
@@ -138,7 +141,7 @@ const StyledMoonButtonWrapper = styled.div`
   padding: 0 20px;
 `
 
-const StyledMoonButtonWrapper2 =  styled.div`
+const StyledMoonButtonWrapper2 = styled.div`
   display: none;
   @media (max-width: 850px) {
     display: block;

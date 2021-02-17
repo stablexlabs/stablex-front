@@ -15,7 +15,7 @@ import useFarms from '../../../hooks/useFarms'
 import useTokenBalance, {
   useTotalSupply,
   useBurnedBalance,
-  useCakePrice
+  useCakePrice,
 } from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
 
@@ -89,76 +89,60 @@ const Balances: React.FC = () => {
         <Card>
           <CardContent>
             <StyledBalances>
-              <SLabel>Your STAX Balance</SLabel>
-              <StyledBalance>
-                <div style={{ flex: 1 }}>
-                  <Value
-                    value={
-                      !!account ? getBalanceNumber(sushiBalance) : 'Locked'
-                    }
-                  />
-                </div>
-              </StyledBalance>
-            </StyledBalances>
-          </CardContent>
-
-          <Footnote>
-            Pending harvest
-            <FootnoteValue>
-              <PendingRewards /> STAX
-            </FootnoteValue>
-          </Footnote>
-        </Card>
-        <Spacer />
-
-        <Card>
-          <CardContent>
-            <StyledBalances>
-              <SLabel>Total STAX Supply</SLabel>
               <StyledBalance>
                 <Value
                   value={
                     totalSupply
-                      ? getBalanceNumber(totalSupply) -
-                        getBalanceNumber(burnedBalance)
+                      ? `$${(
+                          getBalanceNumber(totalSupply) -
+                          getBalanceNumber(burnedBalance)
+                        ).toLocaleString()}`
                       : 'Locked'
                   }
                 />
               </StyledBalance>
+              <SLabel>Total Value Locked</SLabel>
             </StyledBalances>
           </CardContent>
-          <Footnote>
-            New rewards per block
-            <FootnoteValue>2 STAX</FootnoteValue>
-          </Footnote>
         </Card>
         <Spacer />
 
         <Card>
           <CardContent>
             <StyledBalances>
-              <SLabel>Market Cap</SLabel>
               <StyledBalance>
                 <div style={{ flex: 1 }}>
                   <Value
                     value={
                       totalSupply
-                        ? `$${((getBalanceNumber(totalSupply) -
-                          getBalanceNumber(burnedBalance)) * cakePrice).toLocaleString()}`
-                        : 'Locked'
+                        ? `$${(
+                            (getBalanceNumber(totalSupply) -
+                              getBalanceNumber(burnedBalance)) *
+                            cakePrice
+                          ).toLocaleString()}`
+                        : '$xx,xxx,xxx'
                     }
+                  />
+                </div>
+              </StyledBalance>
+              <SLabel>Total Earned</SLabel>
+            </StyledBalances>
+          </CardContent>
+        </Card>
+        <Spacer />
+        <Card>
+          <CardContent>
+            <StyledBalances>
+              <StyledBalance>
+                <div style={{ flex: 1 }}>
+                  <Value
+                    value={!!account ? getBalanceNumber(sushiBalance) : 'x,xx'}
                   />
                 </div>
               </StyledBalance>
             </StyledBalances>
           </CardContent>
-
-          <Footnote>
-            Price
-            <FootnoteValue>
-              ${cakePrice.toFixed(3)}
-            </FootnoteValue>
-          </Footnote>
+          <SLabel>STAX You Owned</SLabel>
         </Card>
       </StyledWrapper>
     </>
@@ -168,13 +152,11 @@ const Balances: React.FC = () => {
 const RowCard = styled.div`
   width: 100%;
   box-shadow: 0px 2px 8px rgba(171, 133, 115, 0.21);
-  border-radius: 20px;
   background: #fff;
   line-height: 60px;
   padding: 0 25px;
   box-sizing: border-box;
   background: ${(props) => props.theme.colors.cardBg};
-
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
@@ -186,8 +168,9 @@ const RowCard = styled.div`
 `
 
 const SLabel = styled.div`
-  line-height: 30px;
-  color: #333;
+  font-weight: normal;
+  color: ${(props) => props.theme.colors.text};
+  text-align: center;
 `
 
 const SLabel2 = styled.div`
@@ -216,8 +199,7 @@ const FootnoteValue = styled.div`
 const StyledWrapper = styled.div`
   align-items: center;
   display: flex;
-  flex-flow: column nowrap;
-  width: 500px;
+  flex-flow: row nowrap;
   margin: 0 auto;
   @media (max-width: 768px) {
     width: 100%;

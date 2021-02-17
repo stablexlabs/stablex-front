@@ -9,7 +9,11 @@ interface ValueProps {
   fontSize?: string | number
 }
 
-const Value: React.FC<ValueProps> = ({ value, decimals, fontSize='14px' }) => {
+const Value: React.FC<ValueProps> = ({
+  value,
+  decimals,
+  fontSize = '14px',
+}) => {
   const [start, updateStart] = useState(0)
   const [end, updateEnd] = useState(0)
 
@@ -21,7 +25,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals, fontSize='14px' }) => {
   }, [value])
 
   return (
-    <StyledValue style={{ 'fontSize': fontSize }}>
+    <StyledValue style={{ fontSize: fontSize }}>
       {typeof value == 'string' ? (
         value
       ) : (
@@ -40,8 +44,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals, fontSize='14px' }) => {
 }
 
 const StyledValue = styled.span`
-  font-family: 'Roboto Mono', monospace;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.thirdly};
   font-size: 14px;
   font-weight: 900;
   align-items: center;
