@@ -1,11 +1,17 @@
 import { createGlobalStyle } from 'styled-components'
 import { ThemeType } from '../../theme'
+import InterFonts from '../../assets/fonts/Inter-VariableFont.ttf'
 
 const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
+  @font-face {
+    font-family: Inter;
+    src: url(${InterFonts});
+  }
+
   body {
     background-color: ${props => props.theme.colors.bg};
     margin: 0;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: Inter;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

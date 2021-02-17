@@ -112,42 +112,43 @@ const FarmCards: React.FC<FarmCardsProps> = ({ removed }) => {
   return (
     <StyledCards>
       {!!rows[0].length ? (
-        rows.map((farmRow, i) => (
-          <StyledRow key={i}>
-            {farmRow.map((farm, j) => (
-              <React.Fragment key={j}>
-                <FarmCard
-                  farm={farm}
-                  stakedValue={realStakedValue[j]}
-                  removed={removed}
-                />
-              </React.Fragment>
-            ))}
-          </StyledRow>
-        ))
+        <StyledRow>
+          {rows.map((farmRow) =>
+            farmRow.map((farm, j) => (
+              <FarmCard
+                farm={farm}
+                stakedValue={realStakedValue[j]}
+                removed={removed}
+                key={j}
+              />
+            )),
+          )}
+        </StyledRow>
       ) : (
         <StyledLoadingWrapper>
           <FContent>
             {forShowPools.map((pool, index) => (
-              <FCard key={index}>
-                <CardImage>
-                  <Multiplier>{pool.multiplier}</Multiplier>
-                </CardImage>
-                <Lable>
-                  <span>Deposit</span>
-                  <span className="right">{pool.symbol}</span>
-                </Lable>
-                <Lable>
-                  <span>Earn</span>
-                  <span className="right">STAX</span>
-                </Lable>
+              <StyledCardWrapper key={index}>
+                <FCard>
+                  <CardImage>
+                    <Multiplier>{pool.multiplier}</Multiplier>
+                  </CardImage>
+                  <Lable>
+                    <span>Deposit</span>
+                    <span className="right">{pool.symbol}</span>
+                  </Lable>
+                  <Lable>
+                    <span>Earn</span>
+                    <span className="right">STAX</span>
+                  </Lable>
 
-                <Button
-                  onClick={handleUnlockClick}
-                  size="md"
-                  text="Unlock Wallet"
-                />
-              </FCard>
+                  <Button
+                    onClick={handleUnlockClick}
+                    size="md"
+                    text="Unlock Wallet"
+                  />
+                </FCard>
+              </StyledCardWrapper>
             ))}
           </FContent>
         </StyledLoadingWrapper>
@@ -186,16 +187,13 @@ const Lable = styled.div`
 
 const FCard = styled.div`
   position: relative;
-  box-shadow: 0px 2px 10px rgba(171, 133, 115, 0.16);
   height: 309px;
   padding: 20px;
   justify-content: center;
   flex-direction: column;
   justify-content: space-around;
   display: flex;
-
-  margin: 6px 0;
-  width: 245px;
+  width: 100%;
   * {
     box-sizing: border-box;
   }
@@ -269,7 +267,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, stakedValue, removed }) => {
   }, [sushi, lpTokenAddress, account, setHarvestable])
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
-
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'STAX' && <StyledCardAccent />}
@@ -372,7 +369,6 @@ const StyledCardAccent = styled.div`
 `
 
 const StyledCards = styled.div`
-  width: 500px;
   margin: 0 auto;
   @media (max-width: 768px) {
     width: 100%;
@@ -388,7 +384,6 @@ const StyledLoadingWrapper = styled.div`
 
 const StyledRow = styled.div`
   display: flex;
-  margin-bottom: ${(props) => props.theme.spacing[4]}px;
   flex-flow: row wrap;
   justify-content: space-between;
   @media (max-width: 768px) {
@@ -401,10 +396,13 @@ const StyledRow = styled.div`
 const StyledCardWrapper = styled.div`
   display: flex;
   position: relative;
-  margin: 5px 0;
+  margin: 16px 0;
+  background: ${(props) => props.theme.colors.cardBg};
   * {
     box-sizing: border-box;
   }
+  border-radius: 32px;
+  width: 350px;
 `
 
 const StyledTitle = styled.h4`
@@ -420,7 +418,7 @@ const StyledContent = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 245px;
+  width: 100%;
 `
 
 const Multiplier = styled.div`
@@ -428,7 +426,7 @@ const Multiplier = styled.div`
   line-height: 25px;
   padding: 0 12px;
   background: ${(props) => props.theme.colors.blue[100]};
-  color: ${(props) => props.theme.colors.bg};
+  color: ${(props) => props.theme.colors.text};
   font-weight: 900;
   left: 20px;
   top: 20px;
@@ -454,7 +452,6 @@ const StyledDetail = styled.div`
 
 const StyledInsight = styled.div`
   display: flex;
-  justify-content: space-between;
   box-sizing: border-box;
   background: #fffdfa;
   color: #aa9584;

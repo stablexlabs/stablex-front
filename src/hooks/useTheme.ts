@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from 'react'
 type ReturnType = [boolean, (isDark: boolean) => void]
 
 function useTheme(): ReturnType {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
   const toogleTheme = useCallback(rs => {
     setIsDark(rs)
   }, [setIsDark])

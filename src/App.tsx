@@ -15,7 +15,7 @@ import BscProvider from './contexts/BscProvider'
 import useModal from './hooks/useModal'
 import useTheme from './hooks/useTheme'
 import Farms from './views/Farms'
-import Home from './views/Home'
+import Pool from './views/Pool'
 import Stake from './views/Stake'
 import Lottery from './views/Lottery'
 import Voting from './views/Voting'
@@ -50,16 +50,16 @@ const App: React.FC = () => {
         <Web3ReactManager>
           <Switch>
             <Route path="/" exact>
-              <Home />
+              <Pool />
             </Route>
             <Route path="/farms">
-              <Farms removed={false}/>
+              <Farms removed={false} />
             </Route>
             <Route path="/staking2">
               <Stake />
             </Route>
             <Route path="/staking">
-              <Syrup />
+              <Pool />
             </Route>
             <Route path="/lottery">
               <Lottery />
@@ -71,7 +71,7 @@ const App: React.FC = () => {
               <Vision />
             </Route>
             <Route path="/removed">
-              <Farms removed={true}/>
+              <Farms removed={true} />
             </Route>
           </Switch>
         </Web3ReactManager>
@@ -87,7 +87,7 @@ const Providers: React.FC<{ isDark: boolean }> = ({ isDark, children }) => {
       <UseWalletProvider
         chainId={56}
         connectors={{
-          walletconnect: { rpcUrl: 'https://bsc-dataseed.binance.org' }
+          walletconnect: { rpcUrl: 'https://bsc-dataseed.binance.org' },
         }}
       >
         <BscProvider>

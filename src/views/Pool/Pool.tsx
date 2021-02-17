@@ -1,13 +1,12 @@
 // @ts-nocheck
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
-import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 import FarmCards from '../Farms/components/FarmCards'
+import Pools from '../Syrup/components/Pools'
 // import Promo from '../../assets/promo.png'
 
 const Home: React.FC = () => {
@@ -35,38 +34,22 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Spacer />
-      <Container>
-    
-         <Spacer />{' '}
-         <StyledInfo>
-           <a
-            target="_blank" 
-            href="https://trade.stablex.finance?ref=homepage"
-          >
-            ➡️ Try the new swap!{' '}
-          </a>
-          <br />
-          
-          <a
-            target="_blank"
-            href="https://exchange.pancakeswap.finance/#/add/ETH/0x0Da6Ed8B13214Ff28e9Ca979Dd37439e8a88F6c4"
-          >
-            ➡️ Add STAX Liquidity{' '}
-          </a>
-          <br />
-          <a
-            target="_blank"
-            href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0da6ed8b13214ff28e9ca979dd37439e8a88f6c4"
-          >
-            ➡️ Buy STAX{' '}
-          </a>
-        </StyledInfo>
-        
-        <Spacer />{' '}
+      <Container size="lg">
+        <LargeOnly>
+          <Spacer size="lg" />
+          <Spacer size="sm" />
+        </LargeOnly>
         <Balances />
-        <Spacer />{' '}
-       
+
+        <Spacer size="lg" />
+        <Spacer size="sm" />
+        <Title>Staking</Title>
         <FarmCards removed={false} />
+
+        <Spacer size="lg" />
+        <Spacer size="sm" />
+        <Title>Pools</Title>
+        <Pools />
       </Container>
       <Spacer size="lg" />
     </Page>
@@ -75,8 +58,9 @@ const Home: React.FC = () => {
 
 const Title = styled.div`
   color: ${(props) => props.theme.colors.primary};
-  line-height: 60px;
-  font-size: 20px;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 500;
 `
 const Countdown = styled.div`
   display: inline-block;
@@ -115,6 +99,12 @@ const StyledInfo = styled.h3`
   }
   > b {
     color: ${(props) => props.theme.colors.primary};
+  }
+`
+
+const LargeOnly = styled.div`
+  @media (max-width: 500px) {
+    display: none;
   }
 `
 

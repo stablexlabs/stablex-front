@@ -9,6 +9,7 @@ export default  {
     text: '#333',
     primary: '#585757',
     secondary: '#909090',
+    thirdly: '#909090',
     inputBg: '#FFF9F0'
   },
 }

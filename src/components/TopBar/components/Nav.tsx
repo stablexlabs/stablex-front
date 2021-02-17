@@ -6,16 +6,11 @@ const Nav: React.FC = () => {
   return (
     <>
       <StyledNav>
-        <StyledLink exact activeClassName="active" to="/">
-          Home
-        </StyledLink>
+        <ExternalLink href="https://trade.stablex.finance">Swap</ExternalLink>
         <StyledLink exact activeClassName="active" to="/staking">
-          Staking
+          Pool
         </StyledLink>
       </StyledNav>
-      <ExternalLink href="https://trade.stablex.finance">
-        Swap(New!)
-      </ExternalLink>
     </>
   )
 }
@@ -31,10 +26,10 @@ const StyledNav = styled.nav`
 `
 
 const ExternalLink = styled.a`
-  font-weight: 700;
+  font-weight: 500;
   padding-left: 16px;
   padding-right: 16px;
-  color: #888583;
+  color: ${(props) => props.theme.colors.text};
   text-decoration: none;
   @media (max-width: 850px) {
     a:first-child {
@@ -43,16 +38,16 @@ const ExternalLink = styled.a`
   }
 `
 const StyledLink = styled(NavLink)`
-  color: ${(props) => props.theme.colors.grey[400]};
-  font-weight: 700;
+  color: ${(props) => props.theme.colors.text};
+  font-weight: 500;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: #333;
+    color: ${(props) => props.theme.colors.text};
   }
   &.active {
-    color: ${(props) => props.theme.colors.grey[600]};
+    font-weight: 700;
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;

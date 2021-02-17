@@ -7,9 +7,10 @@ interface ValueProps {
   value: string | number
   decimals?: number
   fontSize?: string | number
+  color?: string
 }
 
-const Value: React.FC<ValueProps> = ({ value, decimals, fontSize='30px' }) => {
+const Value: React.FC<ValueProps> = ({ value, decimals, fontSize, color }) => {
   const [start, updateStart] = useState(0)
   const [end, updateEnd] = useState(0)
 
@@ -21,7 +22,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals, fontSize='30px' }) => {
   }, [value])
 
   return (
-    <StyledValue style={{ 'fontSize': fontSize }}>
+    <StyledValue style={{ fontSize: fontSize, color }}>
       {typeof value == 'string' ? (
         value
       ) : (
@@ -42,8 +43,11 @@ const Value: React.FC<ValueProps> = ({ value, decimals, fontSize='30px' }) => {
 const StyledValue = styled.div`
   font-family: 'Roboto Mono', monospace;
   color: ${(props) => props.theme.colors.primary};
-  font-size: 30px;
-  font-weight: 900;
+  font-size: 40px;
+  font-weight: 400;
+  @media (max-width: 500px) {
+    font-size: 30px;
+  }
 `
 
 export default Value
