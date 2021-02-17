@@ -97,11 +97,11 @@ const Balances: React.FC = () => {
                           getBalanceNumber(totalSupply) -
                           getBalanceNumber(burnedBalance)
                         ).toLocaleString()}`
-                      : 'Locked'
+                      : '$xx,xxx,xxx'
                   }
                 />
               </StyledBalance>
-              <SLabel>Total Value Locked</SLabel>
+              <SLabel>Circ. Supply</SLabel>
             </StyledBalances>
           </CardContent>
         </Card>
@@ -125,7 +125,7 @@ const Balances: React.FC = () => {
                   />
                 </div>
               </StyledBalance>
-              <SLabel>Total Earned</SLabel>
+              <SLabel>Marketcap</SLabel>
             </StyledBalances>
           </CardContent>
         </Card>
@@ -142,7 +142,7 @@ const Balances: React.FC = () => {
               </StyledBalance>
             </StyledBalances>
           </CardContent>
-          <SLabel>STAX You Owned</SLabel>
+          <SLabel>Your STAX</SLabel>
         </Card>
       </StyledWrapper>
     </>
