@@ -43,12 +43,12 @@ const Home: React.FC = () => {
 
         <Spacer size="lg" />
         <Spacer size="sm" />
-        <Title>Staking</Title>
+        <Title>Pools</Title>
         <FarmCards removed={false} />
 
         <Spacer size="lg" />
         <Spacer size="sm" />
-        <Title>Pools</Title>
+        <Title>Staking</Title>
         <Pools />
       </Container>
       <Spacer size="lg" />

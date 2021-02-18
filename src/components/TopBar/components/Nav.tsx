@@ -18,11 +18,6 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
-  @media (max-width: 850px) {
-    a:first-child {
-      display: none;
-    }
-  }
 `
 
 const ExternalLink = styled.a`
@@ -31,11 +26,6 @@ const ExternalLink = styled.a`
   padding-right: 16px;
   color: ${(props) => props.theme.colors.text};
   text-decoration: none;
-  @media (max-width: 850px) {
-    a:first-child {
-      display: none;
-    }
-  }
 `
 const StyledLink = styled(NavLink)`
   color: ${(props) => props.theme.colors.text};
