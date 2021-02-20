@@ -126,6 +126,7 @@ const Balances: React.FC = () => {
                 </div>
               </StyledBalance>
               <SLabel>Marketcap</SLabel>
+              <SLabel2>{`Price: $${cakePrice.toPrecision(4)}`}</SLabel2>
             </StyledBalances>
           </CardContent>
         </Card>
@@ -174,10 +175,10 @@ const SLabel = styled.div`
 `
 
 const SLabel2 = styled.div`
-  color: #7645d9;
-  @media (max-width: 500px) {
-    line-height: 20px;
-  }
+  color: ${(props) => props.theme.colors.thirdly};
+  text-align: center;
+  font-size: 15px;
+  line-height: 30px;
 `
 
 const Footnote = styled.div`
@@ -199,7 +200,7 @@ const FootnoteValue = styled.div`
 const StyledWrapper = styled.div`
   align-items: center;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   margin: 0 auto;
   @media (max-width: 768px) {
     width: 100%;
