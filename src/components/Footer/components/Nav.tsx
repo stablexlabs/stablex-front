@@ -17,6 +17,12 @@ const Nav: React.FC = () => {
           <StyledLink href="https://medium.com/stablexswap" target="_blank">
             About
           </StyledLink>
+          <StyledLink
+            href="https://bscscan.com/token/0x0da6ed8b13214ff28e9ca979dd37439e8a88f6c4"
+            target="_blank"
+          >
+            BSC Scan
+          </StyledLink>
         </div>
         <Spacer />
         <CopyRight>© {new Date().getFullYear()} StableX</CopyRight>

@@ -10,6 +10,18 @@ const Nav: React.FC = () => {
         <StyledLink exact activeClassName="active" to="/staking">
           Pool
         </StyledLink>
+        <ExternalLink
+          href="https://exchange.pancakeswap.finance/?_gl=1*2camhd*_ga*MTk5ODAyNTk4My4xNjExODI4OTcx*_ga_334KNG3DMQ*MTYxMzYyNDE1MS4zNC4wLjE2MTM2MjQxNTIuMA..#/swap?outputCurrency=0x0da6ed8b13214ff28e9ca979dd37439e8a88f6c4"
+          target="_blank"
+        >
+          Buy STAX
+        </ExternalLink>
+        <ExternalLink
+          href="https://pancakeswap.info/token/0x0da6ed8b13214ff28e9ca979dd37439e8a88f6c4"
+          target="_blank"
+        >
+          Trans. History
+        </ExternalLink>
       </StyledNav>
     </>
   )
