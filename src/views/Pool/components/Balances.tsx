@@ -102,6 +102,7 @@ const Balances: React.FC = () => {
                 />
               </StyledBalance>
               <SLabel>Circ. Supply</SLabel>
+              <SLabel2></SLabel2>
             </StyledBalances>
           </CardContent>
         </Card>
@@ -141,9 +142,10 @@ const Balances: React.FC = () => {
                   />
                 </div>
               </StyledBalance>
+              <SLabel>Your STAX</SLabel>
+              <SLabel2></SLabel2>
             </StyledBalances>
           </CardContent>
-          <SLabel>Your STAX</SLabel>
         </Card>
       </StyledWrapper>
     </>
@@ -179,6 +181,7 @@ const SLabel2 = styled.div`
   text-align: center;
   font-size: 15px;
   line-height: 30px;
+  min-height: 30px;
 `
 
 const Footnote = styled.div`
@@ -198,7 +201,7 @@ const FootnoteValue = styled.div`
 `
 
 const StyledWrapper = styled.div`
-  align-items: center;
+  align-items: stretch;
   display: flex;
   flex-flow: row wrap;
   margin: 0 auto;
