@@ -10,6 +10,6 @@ export default {
     primary: '#fff',
     secondary: 'rgba(255, 255, 255, 0.8)',
     thirdly: 'rgba(255, 255, 255, 0.5)',
-    inputBg: '#FFF9F0'
+    inputBg: '#0e1f31'
   }
 }
