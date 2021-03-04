@@ -5,11 +5,10 @@ import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import { useWallet } from 'use-wallet'
 import Button from '../../../components/Button'
-import Card from '../../../components/Card'
-import CardContent from '../../../components/CardContent'
-import CardIcon from '../../../components/CardIcon'
-import Loader from '../../../components/Loader'
-import Spacer from '../../../components/Spacer'
+import { useHistory } from 'react-router-dom'
+import GenericCard from '../../../components/GenericCard'
+import useEarnings from '../../../hooks/useEarnings'
+import useStakedBalance from '../../../hooks/useStakedBalance'
 import { Farm } from '../../../contexts/Farms'
 import { useTokenBalance2, useBnbPrice } from '../../../hooks/useTokenBalance'
 import useFarms from '../../../hooks/useFarms'
@@ -128,27 +127,20 @@ const FarmCards: React.FC<FarmCardsProps> = ({ removed }) => {
         <StyledLoadingWrapper>
           <FContent>
             {forShowPools.map((pool, index) => (
-              <StyledCardWrapper key={index}>
-                <FCard>
-                  <CardImage>
-                    <Multiplier>{pool.multiplier}</Multiplier>
-                  </CardImage>
-                  <Lable>
-                    <span>Deposit</span>
-                    <span className="right">{pool.symbol}</span>
-                  </Lable>
-                  <Lable>
-                    <span>Earn</span>
-                    <span className="right">STAX</span>
-                  </Lable>
-
-                  <Button
-                    onClick={handleUnlockClick}
-                    size="md"
-                    text="Unlock Wallet"
-                  />
-                </FCard>
-              </StyledCardWrapper>
+              <GenericCard
+                key={index}
+                title={pool.symbol}
+                multiplier={pool.multiplier}
+                ctaText="Unlock Wallet"
+                ctaHandler={handleUnlockClick}
+                staxEarned={0}
+                isRunning={true}
+                informations={{
+                  'Your Stake': '0.000',
+                  APY: '0.000',
+                  Liquidity: '0.000',
+                }}
+              />
             ))}
           </FContent>
         </StyledLoadingWrapper>
@@ -250,7 +242,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, stakedValue, removed }) => {
       </span>
     )
   }
-
+  const history = useHistory()
+  const earnings = useEarnings(farm.pid)
+  const stakedBalance = useStakedBalance(farm.pid)
   useEffect(() => {
     async function fetchEarned() {
       if (sushi) return
@@ -265,83 +259,29 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, stakedValue, removed }) => {
       fetchEarned()
     }
   }, [sushi, lpTokenAddress, account, setHarvestable])
-
   const poolActive = true // startTime * 1000 - Date.now() <= 0
   return (
-    <StyledCardWrapper>
-      {farm.tokenSymbol === 'STAX' && <StyledCardAccent />}
-
-      <StyledContent>
-        <FCard>
-          <CardImage>
-            <Multiplier>{farm.multiplier}</Multiplier>
-          </CardImage>
-          <StyledSpacer2 />
-          <Lable>
-            <span>Deposit</span>
-            <span className="right">
-              {farm.lpToken.toUpperCase().replace('PANSTAX', '')}
-            </span>
-          </Lable>
-          <Lable>
-            <span>Earn</span>
-            <span className="right">STAX</span>
-          </Lable>
-          {!removed && !farm.id.includes('SLP') && (
-            <Lable>
-              <span>APY</span>
-              <span className="right">
-                {farm.apy
-                  ? `${farm.apy
-                      .times(new BigNumber(100))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
-                  : 'Loading ...'}
-              </span>
-            </Lable>
-          )}
-
-          {!farm.id.includes('SLP') && (
-            <Lable>
-              <span>Liquidity</span>
-              <span className="right">
-                ${parseInt(totalValue).toLocaleString()}
-              </span>
-            </Lable>
-          )}
-
-          <StyledSpacer2 />
-
-          <Button
-            disabled={!poolActive}
-            text={poolActive ? 'Select' : undefined}
-            to={`/farms/${farm.id}`}
-          >
-            {!poolActive && (
-              <Countdown
-                date={new Date(startTime * 1000)}
-                renderer={renderer}
-              />
-            )}
-          </Button>
-
-          <Link
-            href={`https://bscscan.com/address/${farm.lpTokenAddress}`}
-            target="_blank"
-          >
-            View on BscScan &gt;
-          </Link>
-        </FCard>
-      </StyledContent>
-    </StyledCardWrapper>
+    <GenericCard
+      title={farm.lpToken.toUpperCase().replace('PANSTAX', '')}
+      multiplier={`x${farm.multiplier.replace('X', '')}`}
+      isRunning={true}
+      staxEarned={getBalanceNumber(earnings)}
+      ctaText={'Select'}
+      ctaHandler={() => history.push(`/farms/${farm.id}`)}
+      informations={{
+        'Your Stake': getBalanceNumber(stakedBalance),
+        APY: farm.apy
+          ? `${farm.apy
+              .times(new BigNumber(100))
+              .toNumber()
+              .toLocaleString('en-US')
+              .slice(0, -1)}%`
+          : 'Loading ...',
+        Liquidity: parseInt(totalValue).toLocaleString(),
+      }}
+    />
   )
 }
-
-const Link = styled.a`
-  text-decoration: none;
-  color: ${(props) => props.theme.colors.secondary};
-`
 
 const RainbowLight = keyframes`
 
@@ -354,18 +294,6 @@ const RainbowLight = keyframes`
 	100% {
 		background-position: 0% 50%;
 	}
-`
-
-const StyledCardAccent = styled.div`
-  background-size: 300% 300%;
-  animation: ${RainbowLight} 2s linear infinite;
-  filter: blur(6px);
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  bottom: -2px;
-  left: -2px;
-  z-index: -1;
 `
 
 const StyledCards = styled.div`
@@ -392,76 +320,4 @@ const StyledRow = styled.div`
     align-items: center;
   }
 `
-
-const StyledCardWrapper = styled.div`
-  display: flex;
-  position: relative;
-  margin: 16px 0;
-  background: ${(props) => props.theme.colors.cardBg};
-  * {
-    box-sizing: border-box;
-  }
-  border-radius: 32px;
-  width: 350px;
-`
-
-const StyledTitle = styled.h4`
-  color: ${(props) => props.theme.colors.primary};
-  font-size: 24px;
-  font-weight: 700;
-  margin: ${(props) => props.theme.spacing[2]}px 0 0;
-  padding: 0;
-`
-
-const StyledContent = styled.div`
-  position: relative;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`
-
-const Multiplier = styled.div`
-  position: absolute;
-  line-height: 25px;
-  padding: 0 12px;
-  background: ${(props) => props.theme.colors.blue[100]};
-  color: ${(props) => props.theme.colors.text};
-  font-weight: 900;
-  left: 20px;
-  top: 20px;
-`
-
-const StyledSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
-`
-
-const StyledSpacer2 = styled.div`
-  height: ${(props) => props.theme.spacing[1]}px;
-  width: ${(props) => props.theme.spacing[1]}px;
-`
-
-const StyledDetails = styled.div`
-  margin-top: ${(props) => props.theme.spacing[2]}px;
-`
-
-const StyledDetail = styled.div`
-  color: ${(props) => props.theme.colors.grey[500]};
-`
-
-const StyledInsight = styled.div`
-  display: flex;
-  box-sizing: border-box;
-  background: #fffdfa;
-  color: #aa9584;
-  width: 100%;
-  margin-top: 12px;
-  line-height: 32px;
-  font-size: 13px;
-  border: 1px solid #e6dcd5;
-
-  padding: 0 12px;
-`
-
 export default FarmCards

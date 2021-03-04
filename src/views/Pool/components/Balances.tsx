@@ -93,15 +93,15 @@ const Balances: React.FC = () => {
                 <Value
                   value={
                     totalSupply
-                      ? `$${(
+                      ? `${(
                           getBalanceNumber(totalSupply) -
                           getBalanceNumber(burnedBalance)
                         ).toLocaleString()}`
-                      : '$xx,xxx,xxx'
+                      : 'xx,xxx,xxx'
                   }
                 />
               </StyledBalance>
-              <SLabel>Circ. Supply</SLabel>
+              <SLabel>Circulating Supply</SLabel>
               <SLabel2></SLabel2>
             </StyledBalances>
           </CardContent>
@@ -193,7 +193,7 @@ const Footnote = styled.div`
   padding: 0 2rem;
 `
 const FootnoteValue = styled.div`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto Mono';
   float: right;
   height: 50px;
   line-height: 50px;

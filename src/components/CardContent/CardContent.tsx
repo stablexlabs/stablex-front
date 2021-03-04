@@ -1,4 +1,3 @@
-
 import React from 'react'
 import styled from 'styled-components'
 
@@ -10,9 +9,7 @@ const StyledCardContent = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  cursor: pointer;
   padding: ${(props) => props.theme.spacing[2]}px;
-
 `
 
 export default CardContent

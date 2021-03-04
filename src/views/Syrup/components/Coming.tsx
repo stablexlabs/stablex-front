@@ -13,12 +13,15 @@ import Value from '../../../components/Value'
 
 import { useSousAllowance } from '../../../hooks/useAllowance'
 import { useSousApprove } from '../../../hooks/useApprove'
-import {useSousEarnings, useSousLeftBlocks} from '../../../hooks/useEarnings'
+import { useSousEarnings, useSousLeftBlocks } from '../../../hooks/useEarnings'
 import useModal from '../../../hooks/useModal'
-import useStake, {useSousStake} from '../../../hooks/useStake'
-import {useSousStakedBalance, useSousTotalStaked} from '../../../hooks/useStakedBalance'
+import useStake, { useSousStake } from '../../../hooks/useStake'
+import {
+  useSousStakedBalance,
+  useSousTotalStaked,
+} from '../../../hooks/useStakedBalance'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useUnstake, {useSousUnstake} from '../../../hooks/useUnstake'
+import useUnstake, { useSousUnstake } from '../../../hooks/useUnstake'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 import SmallValue from './Value'
@@ -30,7 +33,6 @@ import WalletProviderModal from '../../../components/WalletProviderModal'
 import AccountModal from '../../../components/TopBar/components/AccountModal'
 
 const Coming: React.FC = () => {
-
   return (
     <Card>
       <CardContent>
@@ -44,18 +46,15 @@ const Coming: React.FC = () => {
           </StyledCardContent>
 
           <StyledCardActions>
-            <Button
-              disabled={true}
-              text={`Coming soon...`}
-            />
+            <Button disabled={true} text={`Coming soon...`} />
           </StyledCardActions>
 
           <StyledLabel text="Your Stake" value={0} />
 
           <StyledCardFooter>
             <p>
-              Total STAX staked: 0 <br/>
-             Farming starts in ??? Blocks
+              Total STAX staked: 0 <br />
+              Farming starts in ??? Blocks
             </p>
           </StyledCardFooter>
         </StyledCardContentInner>
@@ -73,7 +72,7 @@ const StyledCardFooter = styled.div`
 `
 
 const StyledCardContent = styled.div`
-  text-align:  center;
+  text-align: center;
   padding: 10px 20px;
   img {
     width: 60px;
@@ -129,24 +128,22 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-
 interface StyledLabelProps {
   value: number
   text: string
 }
 
 const StyledLabel: React.FC<StyledLabelProps> = ({ value, text }) => {
-
   return (
     <StyledValue>
       <p>{text}</p>
-      <SmallValue value={value}/>
+      <SmallValue value={value} />
     </StyledValue>
   )
 }
 
 const StyledValue = styled.div`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto Mono';
   color: ${(props) => props.theme.colors.secondary};
   font-size: 16px;
   font-weight: 900;
@@ -156,7 +153,6 @@ const StyledValue = styled.div`
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
-
 `
 
 export default Coming

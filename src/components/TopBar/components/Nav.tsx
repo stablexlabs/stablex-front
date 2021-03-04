@@ -20,7 +20,7 @@ const Nav: React.FC = () => {
           href="https://pancakeswap.info/token/0x0da6ed8b13214ff28e9ca979dd37439e8a88f6c4"
           target="_blank"
         >
-          Trans. History
+          Transaction History
         </ExternalLink>
       </StyledNav>
     </>

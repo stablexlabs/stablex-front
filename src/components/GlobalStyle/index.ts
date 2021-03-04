@@ -1,11 +1,17 @@
 import { createGlobalStyle } from 'styled-components'
 import { ThemeType } from '../../theme'
 import InterFonts from '../../assets/fonts/Inter-VariableFont.ttf'
+import RobotoMono from '../../assets/fonts/RobotoMono.ttf'
 
 const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   @font-face {
     font-family: Inter;
     src: url(${InterFonts});
+  }
+
+  @font-face {
+    font-family: 'Roboto Mono';
+    src: url(${RobotoMono});
   }
 
   body {
@@ -24,8 +30,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   }
 
   code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+    font-family: 'Roboto Mono';
   }
 `
 
