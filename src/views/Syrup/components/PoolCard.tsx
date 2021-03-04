@@ -57,6 +57,7 @@ const PoolCard: React.FC<HarvestProps> = ({
   const [requestedUnstake, setRequestedUnstake] = useState(false)
   const { account } = useWallet()
   const allowance = useSousAllowance(syrup, sousId)
+
   console.log(syrup)
   const { onApprove } = useSousApprove(syrup, sousId)
   const leftBlockText = useSousLeftBlocks(sousId)
@@ -166,6 +167,7 @@ const PoolCard: React.FC<HarvestProps> = ({
                 onClick={handleUnlockClick}
                 size="md"
                 text="Unlock Wallet"
+                borderRadius={32}
               />
             )}
             {account &&
@@ -226,7 +228,6 @@ const PoolCard: React.FC<HarvestProps> = ({
 
 const Multiplier = styled.div`
   line-height: 60px;
-  padding: 0 12px;
   font-size: 24px;
   color: ${(props) => props.theme.colors.secondary};
   font-weight: 900;

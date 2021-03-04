@@ -12,6 +12,7 @@ interface ButtonProps {
   text?: string
   to?: string
   variant?: 'default' | 'secondary' | 'tertiary'
+  borderRadius?: number
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   text,
   to,
   variant,
+  borderRadius = 6,
 }) => {
   const { colors, spacing } = useContext(ThemeContext)
   const buttonColor = colors.bg
@@ -83,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       padding={buttonPadding}
       size={buttonSize}
+      borderRadius={borderRadius}
     >
       {children}
       {ButtonChild}
@@ -97,13 +100,14 @@ interface StyledButtonProps {
   fontSize: number
   padding: number
   size: number
+  borderRadius: number
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
   background: #18a0fb;
   border: 0;
-  border-radius: 6px;
+  border-radius: ${(props) => props.borderRadius}px;
   color: #fff;
   cursor: pointer;
   display: flex;
